@@ -1,0 +1,24 @@
+# Deploy: tell Tilt what YAML to deploy
+#k8s_yaml('kustomize/base/deployment.yaml')
+#k8s_yaml('kustomize/base/service.yaml')
+#k8s_yaml(kustomize('kustomize/overlays/dev'))
+
+
+#docker_build('webapp:1.0', '.')
+
+#docker_build(
+#   'my-web-app',            # Image name
+ #  '.',                     # Docker context (directory containing Dockerfile)
+  # dockerfile='Dockerfile',  # Path to Dockerfile          # Enable automatic image tagging
+#)
+
+
+
+import tilt.globals as tg
+
+def docker_build(image_name, context):
+  """Builds an image and tags it with the name of the service."""
+  tg.docker_build(image_name, context, tag=image_name)
+
+# This service uses the image "my-image".
+service('my-service', (docker_build('my-image', '.')))

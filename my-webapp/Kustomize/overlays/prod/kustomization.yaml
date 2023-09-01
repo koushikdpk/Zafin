@@ -1,0 +1,7 @@
+resources:
+- ../../base/
+
+namePrefix: prod-
+replicas:
+- name: web-app
+  count: 1
