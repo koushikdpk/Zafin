@@ -6,17 +6,19 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/koushikdpk/Zafin.git
+    repoURL: https://github.com/koushikdpk/Zafin
     targetRevision: HEAD
-    path: my-webapp
+    path: my-webapp/Kustomize/overlays/dev
   destination:
     server: https://kubernetes.default.svc
     namespace: myapp
   syncPolicy:
     syncOptions:
     - CreateNamespace=true
+
     automated:
       selfHeal: true
       prune: true
+
 
 
