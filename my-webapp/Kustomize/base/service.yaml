@@ -10,5 +10,5 @@ spec:
     - name: http
       nodePort: 30950
       protocol: TCP
-      port: 8082
+      port: 8080
 
