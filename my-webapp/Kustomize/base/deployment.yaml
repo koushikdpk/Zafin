@@ -17,4 +17,4 @@ spec:
         image: koushikdp/webapp:latest
         #image: localhost:5000/webapp:latest
         ports:
-        - containerPort: 8080 # Replace with the port your Spring Boot app listens on
+        - containerPort: 8082 # Replace with the port your Spring Boot app listens on
