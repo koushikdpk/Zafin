@@ -14,11 +14,12 @@
 
 
 
-import tilt.globals as tg
+# Tiltfile
 
-def docker_build(image_name, context):
-  """Builds an image and tags it with the name of the service."""
-  tg.docker_build(image_name, context, tag=image_name)
-
-# This service uses the image "my-image".
-service('my-service', (docker_build('my-image', '.')))
+docker_build(
+    "webapp:1.0",
+    context=".",
+    dockerfile="Dockerfile",
+    push="127.0.0.1:5001/webapp:1.0",  # Tag the image for your local registry
+)
+ 
