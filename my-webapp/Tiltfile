@@ -1,25 +1,18 @@
-# Deploy: tell Tilt what YAML to deploy
-#k8s_yaml('kustomize/base/deployment.yaml')
-#k8s_yaml('kustomize/base/service.yaml')
-#k8s_yaml(kustomize('kustomize/overlays/dev'))
+# Specify the address of your local Docker registry
+local_registry = 'localhost:5001' 
 
+# Kubernetes YAML with Kustomize
+k8s_yaml(kustomize('kustomize/overlays/dev'))
 
-#docker_build('webapp:1.0', '.')
-
-#docker_build(
-#   'my-web-app',            # Image name
- #  '.',                     # Docker context (directory containing Dockerfile)
-  # dockerfile='Dockerfile',  # Path to Dockerfile          # Enable automatic image tagging
-#)
-
-
-
-# Tiltfile
-
+# Docker Image Build and Push
 docker_build(
-    "webapp:1.0",
-    context=".",
-    dockerfile="Dockerfile",
-    push="127.0.0.1:5001/webapp:1.0",  # Tag the image for your local registry
-)
- 
+    'localhost:5001/webapp',
+   '.',  
+    dockerfile='Dockerfile',
+    only=['./'],)
+
+#docker('tag', 'webapp:1.2', 'local_registry/webapp:1.2')
+
+
+
+#k8s_resource('dev-web-app', port_forwards=8085)
