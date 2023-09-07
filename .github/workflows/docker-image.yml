@@ -24,8 +24,8 @@ jobs:
       - name: Build and tag Docker image
         run: |
           echo $pwd
-          cd \actions-runner\_work\Zafin\Zafin\my-webapp
-          docker build -t koushikdp/webapp:1.2 .
+          cd \Users\Geico\actions-runner\_work\Zafin\Zafin\my-webapp\
+          docker build -t koushikdp/webapp:1.4 .
           #docker tag my-docker-image:latest my-dockerhub-username/my-docker-image:version-tag  # Adjust the image name and tag as needed
 
       - name: Push Docker image to Docker Hub
