@@ -25,9 +25,9 @@ jobs:
         run: |
           echo $pwd
           cd \Users\Geico\actions-runner\_work\Zafin\Zafin\my-webapp\
-          docker build -t koushikdp/webapp:1.5 .
+          docker build -t koushikdp/webapp:1.6 .
           #docker tag my-docker-image:latest my-dockerhub-username/my-docker-image:version-tag  # Adjust the image name and tag as needed
 
       - name: Push Docker image to Docker Hub
         run: |
-          docker push koushikdp/webapp:1.5  # Adjust the image name and tag as needed
+          docker push koushikdp/webapp:1.6  # Adjust the image name and tag as needed
