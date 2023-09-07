@@ -22,7 +22,7 @@ jobs:
       - name: Build and tag Docker image
         run: |
           echo $pwd
-          cd /home/runner/work/_temp/3d3dbf02-9224-4737-bda9-eab3fbbfb180/Zafin/my-webapp/
+          cd \C:\Users\Geico\actions-runner\_work\Zafin\Zafin\my-webapp
           docker build -t koushikdp/webapp:1.2 .
           #docker tag my-docker-image:latest my-dockerhub-username/my-docker-image:version-tag  # Adjust the image name and tag as needed
 
