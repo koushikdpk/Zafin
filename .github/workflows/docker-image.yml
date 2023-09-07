@@ -9,7 +9,7 @@ on:
 
 jobs:
   build-and-push:
-    runs-on: ubuntu-latest  # You can choose another runner, if needed
+    runs-on: self-hosted # You can choose another runner, if needed
 
     steps:
       - name: Checkout code
