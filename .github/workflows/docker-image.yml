@@ -1,11 +1,50 @@
+# name: Build and Push Docker Image
+
+# on:
+#   workflow_dispatch: 
+#   push:
+#     branches: [ "main" ]
+#   pull_request:
+#     branches: [ "main" ]
+
+# jobs:
+#   build-and-push:
+#     runs-on: self-hosted # You can choose another runner, if needed
+
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v2
+        
+#       - name: Login to Docker Hub
+#         uses: docker/login-action@v2
+#         with:
+#           username: ${{ secrets.DOCKER_HUB_USERNAME }}
+#           password: ${{ secrets.DOCKER_HUB_PASSWORD }}
+    
+#       - name: Build and tag Docker image
+#         run: |
+#           echo $pwd
+#           cd \Users\Geico\actions-runner\_work\Zafin\Zafin\my-webapp\
+#           docker build -t koushikdp/webapp:1.7 .
+#           #docker tag my-docker-image:latest my-dockerhub-username/my-docker-image:version-tag  # Adjust the image name and tag as needed
+
+#       - name: Push Docker image to Docker Hub
+#         run: |
+#           docker push koushikdp/webapp:1.7  # Adjust the image name and tag as needed
+
+
+
 name: Build and Push Docker Image
 
 on:
-  workflow_dispatch: 
+  workflow_dispatch:
   push:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
+
+env:
+  DOCKER_VERSION: 1.8 # Define it at the top level
 
 jobs:
   build-and-push:
@@ -14,20 +53,35 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-        
+
+      - name: Update Docker Version in GitHub Actions Workflow
+        run: |
+          sed -i "s/image: koushikdp\/webapp:.*$/image: koushikdp\/webapp:${DOCKER_VERSION}/g" .github/workflows/main.yaml
+        env:
+          DOCKER_VERSION: ${{ env.DOCKER_VERSION }} # Use the top-level definition
+
       - name: Login to Docker Hub
         uses: docker/login-action@v2
         with:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_PASSWORD }}
-    
+
       - name: Build and tag Docker image
         run: |
           echo $pwd
           cd \Users\Geico\actions-runner\_work\Zafin\Zafin\my-webapp\
-          docker build -t koushikdp/webapp:1.7 .
-          #docker tag my-docker-image:latest my-dockerhub-username/my-docker-image:version-tag  # Adjust the image name and tag as needed
+          docker build -t koushikdp/webapp:${DOCKER_VERSION} .
+        env:
+          DOCKER_VERSION: ${{ env.DOCKER_VERSION }}
 
       - name: Push Docker image to Docker Hub
         run: |
-          docker push koushikdp/webapp:1.7  # Adjust the image name and tag as needed
+          docker push koushikdp/webapp:${DOCKER_VERSION}
+        env:
+          DOCKER_VERSION: ${{ env.DOCKER_VERSION }}
+
+      - name: Update Docker Version in kustomize Deployment YAML
+        run: |
+          sed -i "s/image: koushikdp\/webapp:.*$/image: koushikdp\/webapp:${DOCKER_VERSION}/g" kustomize/base/deployment.yaml
+        env:
+          DOCKER_VERSION: ${{ env.DOCKER_VERSION }}
