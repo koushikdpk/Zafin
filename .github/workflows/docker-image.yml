@@ -44,7 +44,7 @@ on:
     branches: [ "main" ]
 
 env:
-  DOCKER_VERSION: 1.7 # Define it at the top level
+  DOCKER_VERSION: 1.8 # Define it at the top level
 
 jobs:
   build-and-push:

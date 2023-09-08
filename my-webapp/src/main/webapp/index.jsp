@@ -5,7 +5,7 @@
 </head>
 <body style="background-color:wheat;">
 <center>
-    <Marquee> <h1>Welcome to my sample Website created for KinD cluster</h1></Marquee>
+    <Marquee> <h1>Welcome to my sample Website created for KinD clusters</h1></Marquee>
 
 <p>This is a sample page built with Maven and deployed in kinD cluster, used Kustomize and updated with <a href="https://127.0.0.1:8080/applications/argocd/myapp-argo-application?view=tree&operation=false&rollback=-1&resource=">argoCD.</a> 
 </p>
