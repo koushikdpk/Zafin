@@ -78,5 +78,7 @@ jobs:
       - name: Update Docker Version in kustomize Deployment YAML
         shell: powershell
         run: |
-          (Get-Content C:\Users\Geico\actions-runner\_work\Zafin\Zafin\my-webapp\Kustomize\base\deployment.yaml).replace('image: koushikdp/webapp:.*$', "image: koushikdp/webapp:${env:DOCKER_VERSION}") | Set-Content C:\Users\Geico\actions-runner\_work\Zafin\Zafin\my-webapp\Kustomize\base\deployment.yaml
+            (Get-Content -Path C:\Users\Geico\actions-runner\_work\Zafin\Zafin\my-webapp\Kustomize\base\deployment.yaml) | ForEach-Object { $_ -replace 'image: .*/webapp:.*$', "image: ***/webapp:${env:DOCKER_VERSION}" } | Set-Content -Path C:\Users\Geico\actions-runner\_work\Zafin\Zafin\my-webapp\Kustomize\base\deployment.yaml
+        env:
+          DOCKER_VERSION: 1.8
 
